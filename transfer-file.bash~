@@ -1,0 +1,17 @@
+#!/bin/bash
+DISK_DIR=/home/hongyu/system-files/full_system_img/x86-system/disks/
+GEM5_DIR=/home/hongyu/
+if [[ "$#" != 1 ]]
+then
+	echo "specify 1 file name"
+	exit
+fi
+    echo "mount disk image"
+	$GEM5_DIR/gem5-fy/util/gem5img.py mount $DISK_DIR/x86root-parsec-spec.img $DISK_DIR/tmp
+	echo "copy $1 file to parsec/"
+	sudo cp $1 $DISK_DIR/tmp/parsec/
+	echo "umount diskimage"
+	sleep 2
+    $GEM5_DIR/gem5/util/gem5img.py umount  $DISK_DIR/tmp
+
+
